@@ -5,7 +5,7 @@ import Environment from "./environment";
 const isProduction = Environment.NODE_ENV === "production";
 
 class Logger {
-  logger: winston.Logger;
+  private logger: winston.Logger;
 
   constructor() {
     this.logger = winston.createLogger({
