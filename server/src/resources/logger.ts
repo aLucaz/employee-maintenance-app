@@ -1,15 +1,15 @@
 import winston from "winston";
 
-import env from "./environment";
+import Environment from "./environment";
 
-const isProduction = env.ENVIRONMENT === "production";
+const isProduction = Environment.NODE_ENV === "production";
 
 class Logger {
   logger: winston.Logger;
 
   constructor() {
     this.logger = winston.createLogger({
-      level: env.LOG_LEVEL ?? "info",
+      level: Environment.LOG_LEVEL ?? "info",
       exitOnError: false,
     });
 
