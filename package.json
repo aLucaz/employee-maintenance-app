@@ -1,0 +1,13 @@
+{
+  "name": "employee-maintenance-app",
+  "version": "1.0.0",
+  "scripts": {
+    "install-all": "yarn install && cd client && yarn && cd ../server && yarn",
+    "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
+    "dev:client": "cd client && yarn dev",
+    "dev:server": "cd server && yarn dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}

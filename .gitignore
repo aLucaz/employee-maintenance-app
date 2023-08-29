@@ -1,0 +1,7 @@
+# Dependency directory
+node_modules
+
+# Ides & OSs
+.DS_Store
+.idea
+.vscode

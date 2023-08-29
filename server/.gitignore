@@ -1,0 +1,13 @@
+# Dependency directory
+node_modules
+
+# Ts
+dist/
+
+# Ides & OSs
+.DS_Store
+.idea
+.vscode
+
+# Env variables
+.env
