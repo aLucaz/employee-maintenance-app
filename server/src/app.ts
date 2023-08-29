@@ -1,11 +1,16 @@
-import express from 'express'
+import cors from "cors";
+import express from "express";
 
-const app = express()
+import env from "./resources/environment";
+import Logger from "./resources/logger";
 
-app.get("/", (req, res) => {
-    console.log("base.")
-})
+const app = express();
+const port = env.PORT;
 
-app.listen(8080, () => {
-    console.log(` Server is running at ${8080} 🚀`)
-})
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.listen(port, () => {
+  Logger.info(` Server is running at ${port} 🚀`);
+});
