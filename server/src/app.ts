@@ -4,6 +4,7 @@ import helmet from "helmet";
 import createHttpError from "http-errors";
 
 import BaseRouter from "./resources/base-router";
+import { startDatabase } from "./resources/database/database-startup";
 import Environment from "./resources/environment";
 import ErrorMiddleware from "./resources/error-middleware";
 import Logger from "./resources/logger";
@@ -31,6 +32,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.listen(port, () => {
-  Logger.info(` Server is running at ${port} 🚀`);
+app.listen(port, async () => {
+  Logger.info(`Server is running at ${port} 🚀`);
+  if (Environment.NODE_ENV === "development") {
+    Logger.info("Starting database...");
+    await startDatabase();
+    Logger.info("Database started.");
+  }
 });

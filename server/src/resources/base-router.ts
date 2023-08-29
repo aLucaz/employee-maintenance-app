@@ -1,9 +1,9 @@
 import { Router as router } from "express";
 
-import employeeRouter from "../employee/infrastructure/employee-router";
+import EmployeeRouter from "../employee/infrastructure/employee-router";
 
 const baseRouter = router();
 
-baseRouter.use("/employee", employeeRouter);
+baseRouter.use("/employee", EmployeeRouter);
 
 export default baseRouter;
