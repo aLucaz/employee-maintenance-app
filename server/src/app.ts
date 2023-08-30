@@ -1,3 +1,6 @@
+import "reflect-metadata";
+import "express-async-errors";
+
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
@@ -32,11 +35,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.listen(port, async () => {
-  Logger.info(`Server is running at ${port} 🚀`);
-  if (Environment.NODE_ENV === "development") {
-    Logger.info("Starting database...");
+async function startServer() {
+  try {
     await startDatabase();
-    Logger.info("Database started.");
+    app.listen(port);
+    Logger.info(`Server is running at ${port} 🚀`);
+  } catch (error) {
+    Logger.error("Error starting server:", error);
   }
-});
+}
+
+startServer();

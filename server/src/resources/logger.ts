@@ -33,23 +33,20 @@ class Logger {
     );
   }
 
-  public info(message: string | object) {
+  public info(message: string) {
     this.logger.info(message);
   }
 
-  public debug(message: string | object) {
+  public debug(message: string) {
     this.logger.debug(message);
   }
 
-  public warn(message: string | object) {
+  public warn(message: string) {
     this.logger.warn(message);
   }
 
-  public error(message: string, error: Error) {
-    this.logger.error(message, {
-      error: error.message,
-      stack: error.stack,
-    });
+  public error(message: string, error: unknown) {
+    this.logger.error(message, error);
   }
 }
 

@@ -1,11 +1,15 @@
 import { Router as router } from "express";
 
-import Logger from "../../resources/logger";
+import { EmployeeController } from "./employee-controller";
+import container from "./injection/container";
+import { Types } from "./injection/types";
 
 const employeeRouter = router();
 
-employeeRouter.post("/", () => {
-  Logger.info("asd");
-});
+const employeeController = container.get<EmployeeController>(
+  Types.EmployeeController,
+);
+
+employeeRouter.post("/", employeeController.createEmployee);
 
 export default employeeRouter;

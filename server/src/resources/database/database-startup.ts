@@ -1,15 +1,18 @@
+import container from "../../employee/infrastructure/injection/container";
+import { Types } from "../../employee/infrastructure/injection/types";
+import Environment from "../environment";
 import Logger from "../logger";
-import client from "./database-client";
 import script from "./database-script";
+import { DatabaseService } from "./database-service";
+
+const databaseService = container.get<DatabaseService>(
+  Types.PostgresDatabaseService,
+);
 
 export async function startDatabase() {
-  try {
-    await client.connect();
-    await client.query(script);
-  } catch (err) {
-    Logger.error("Error initializing database", err as Error);
-    throw err;
-  } finally {
-    await client.end();
+  if (Environment.NODE_ENV === "development") {
+    Logger.info("Starting database...");
+    await databaseService.execute(script);
+    Logger.info("Database started.");
   }
 }
