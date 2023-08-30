@@ -1,8 +1,10 @@
 import { inject, injectable } from "inversify";
 
-import { DatabaseService } from "../../../resources/database/database-service";
-import { EmployeeRepository } from "../../domain/employee-repository";
-import { Employee } from "../../domain/entity/employee";
+import { EmployeeRepository } from "@/employee/domain/employee-repository";
+import { Employee } from "@/employee/domain/entity/employee";
+import { DatabaseService } from "@/resources/database/database-service";
+import Logger from "@/resources/logger";
+
 import { Types } from "../injection/types";
 import EmployeeQueries from "./employee-queries";
 
@@ -17,19 +19,36 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     await this.databaseService.execute(EmployeeQueries.CREATE, data);
   }
 
-  // delete(id: string): Promise<void> {
-  //   return Promise.resolve(undefined);
-  // }
-  //
-  // get(id: string): Promise<Employee> {
-  //   return Promise.resolve(undefined);
-  // }
-  //
-  // getAll(): Promise<Array<Employee>> {
-  //   return Promise.resolve(undefined);
-  // }
-  //
-  // update(id: string, data: Employee): Promise<void> {
-  //   return Promise.resolve(undefined);
-  // }
+  async delete(id: number): Promise<void> {
+    await this.databaseService.execute(EmployeeQueries.DELETE, { id });
+  }
+
+  async getById(id: number): Promise<Employee> {
+    const res = await this.databaseService.execute(EmployeeQueries.GET_BY_ID, {
+      id,
+    });
+    Logger.info(JSON.stringify(res, null, 2));
+    return res.rows[0];
+  }
+
+  async getByNamePhone(data: Employee): Promise<Employee> {
+    const res = await this.databaseService.execute(
+      EmployeeQueries.GET_BY_NAME_PHONE,
+      data,
+    );
+    return res.rows[0];
+  }
+
+  async getAll(): Promise<Array<Employee>> {
+    const res = await this.databaseService.execute(EmployeeQueries.GET_ALL);
+    return res.rows;
+  }
+
+  async update(id: number, data: Employee): Promise<void> {
+    const res = await this.databaseService.execute(EmployeeQueries.UPDATE, {
+      ...data,
+      id,
+    });
+    Logger.info(JSON.stringify(res, null, 2));
+  }
 }

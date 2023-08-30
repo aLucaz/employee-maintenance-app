@@ -17,7 +17,10 @@ export class DatabaseService {
     });
   }
 
-  async execute(query: string, data?: Employee): Promise<QueryResult> {
+  async execute(
+    query: string,
+    data?: Employee | { id: number },
+  ): Promise<QueryResult> {
     const client = this.getConnection();
     try {
       await client.connect();
@@ -30,14 +33,14 @@ export class DatabaseService {
       Logger.info("Query executed.");
       return res;
     } catch (err) {
-      Logger.error("Error executing query.", err);
+      Logger.error("Error executing query:", err);
       throw err;
     } finally {
       await client.end();
     }
   }
 
-  private bind(query: string, data: Employee): string {
+  private bind(query: string, data: Employee | { id: number }): string {
     let bindedQuery = `${query}`;
     Object.entries(data).forEach(([key, value]) => {
       bindedQuery = bindedQuery.replace(

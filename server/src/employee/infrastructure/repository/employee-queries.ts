@@ -14,6 +14,14 @@ class EmployeeQueries {
     WHERE id = :id
   `;
 
+  GET_BY_NAME_PHONE = `
+    SELECT * 
+    FROM employee 
+    WHERE first_name = :firstName AND
+          last_name = :lastName AND
+          phone = :phone
+  `;
+
   GET_ALL = `
     SELECT * 
     FROM employee

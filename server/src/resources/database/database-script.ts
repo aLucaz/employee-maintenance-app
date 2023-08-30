@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS employee (
     hire_date timestamp not null,
     phone varchar(12),
     address varchar(50),
-    CONSTRAINT unique_name_phone UNIQUE (first_name, last_name, hire_date)
+    CONSTRAINT unique_name_phone UNIQUE (first_name, last_name, phone)
 );
 
 CREATE TABLE IF NOT EXISTS department (

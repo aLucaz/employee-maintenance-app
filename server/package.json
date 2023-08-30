@@ -16,6 +16,7 @@
     "helmet": "^7.0.0",
     "http-errors": "^2.0.0",
     "inversify": "^6.0.1",
+    "module-alias": "^2.2.3",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "winston": "^3.10.0"
@@ -41,5 +42,8 @@
     "nodemon": "^3.0.1",
     "prettier": "^3.0.2",
     "typescript": "*"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }

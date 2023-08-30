@@ -11,5 +11,9 @@ const employeeController = container.get<EmployeeController>(
 );
 
 employeeRouter.post("/", employeeController.createEmployee);
+employeeRouter.get("/:id", employeeController.getEmployeeById);
+employeeRouter.get("/", employeeController.listEmployees);
+employeeRouter.put("/:id", employeeController.updateEmployee);
+employeeRouter.delete("/:id", employeeController.removeEmployee);
 
 export default employeeRouter;
