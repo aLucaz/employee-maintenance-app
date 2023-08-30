@@ -1,0 +1,22 @@
+services:
+  server:
+    container_name: ema_server
+    platform: linux/amd64
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - PORT=8000
+      - NODE_ENV=development
+      - LOG_LEVEL=info
+      - PG_USERNAME=admin
+      - PG_PASSWORD=admin
+      - PG_HOST=postgres
+      - PG_DATABASE=db_staff
+      - PG_PORT=5432
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
