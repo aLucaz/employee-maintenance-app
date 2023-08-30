@@ -14,11 +14,12 @@ export class UpdateEmployeeService {
     private employeeRepository: EmployeeRepository,
   ) {}
 
-  async execute(id: number, data: Employee) {
+  async execute(id: number, data: Employee): Promise<Employee | null> {
     Logger.info("Updating employee...");
     try {
       await this.employeeRepository.update(id, data);
       Logger.info("Employee updated.");
+      return this.employeeRepository.getById(id);
     } catch (error) {
       throw new createHttpError.InternalServerError(
         "An internal error occurred.",

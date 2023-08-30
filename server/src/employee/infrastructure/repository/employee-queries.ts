@@ -30,11 +30,7 @@ class EmployeeQueries {
 
   UPDATE = `
     UPDATE employee
-    SET first_name = :firstName, 
-        last_name = :lastName,
-        phone = :phone,
-        address = :address,
-        hire_date = :hireDate
+    SET :updates
     WHERE id = :id;
   `;
 }

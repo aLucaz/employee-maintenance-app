@@ -45,10 +45,11 @@ export class EmployeeController {
 
   updateEmployee = async (req: Request, res: Response) => {
     Logger.info("__updateEmployee__");
-    await this.updateEmployeeService.execute(Number(req.params.id), req.body);
-    res.status(200).json({
-      message: "Employee updated successfully.",
-    });
+    const data = await this.updateEmployeeService.execute(
+      Number(req.params.id),
+      req.body,
+    );
+    res.status(200).json(data);
   };
 
   removeEmployee = async (req: Request, res: Response) => {

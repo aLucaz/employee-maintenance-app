@@ -1,4 +1,3 @@
-import createHttpError from "http-errors";
 import { inject, injectable } from "inversify";
 
 import Logger from "@/resources/logger";
@@ -15,13 +14,7 @@ export class DeleteEmployeeService {
 
   async execute(id: number): Promise<void> {
     Logger.info("Deleting employee...");
-    try {
-      await this.employeeRepository.delete(id);
-      Logger.info(`Employee ${id} deleted.`);
-    } catch (error) {
-      throw new createHttpError.InternalServerError(
-        "An internal error occurred.",
-      );
-    }
+    await this.employeeRepository.delete(id);
+    Logger.info(`Employee ${id} deleted.`);
   }
 }

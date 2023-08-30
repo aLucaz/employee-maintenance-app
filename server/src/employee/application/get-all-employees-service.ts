@@ -1,5 +1,6 @@
 import { inject, injectable } from "inversify";
 
+import { Employee } from "@/employee/domain/entity/employee";
 import Logger from "@/resources/logger";
 
 import { EmployeeRepository } from "../domain/employee-repository";
@@ -12,7 +13,7 @@ export class GetAllEmployeesService {
     private employeeRepository: EmployeeRepository,
   ) {}
 
-  async execute() {
+  async execute(): Promise<Array<Employee>> {
     Logger.info("Searching tasks...");
     return this.employeeRepository.getAll();
   }

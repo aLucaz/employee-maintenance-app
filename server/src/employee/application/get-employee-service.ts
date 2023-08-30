@@ -1,7 +1,7 @@
 import createHttpError from "http-errors";
 import { inject, injectable } from "inversify";
 
-import Logger from "@/resources/logger";
+import { Employee } from "@/employee/domain/entity/employee";
 
 import { EmployeeRepository } from "../domain/employee-repository";
 import { Types } from "../infrastructure/injection/types";
@@ -13,15 +13,11 @@ export class GetEmployeeService {
     private employeeRepository: EmployeeRepository,
   ) {}
 
-  async execute(id: number) {
-    try {
-      const employee = await this.employeeRepository.getById(id);
-      Logger.info("Employee found!");
-      return employee;
-    } catch (error) {
-      throw new createHttpError.InternalServerError(
-        "An internal error occurred.",
-      );
+  async execute(id: number): Promise<Employee> {
+    const employee = await this.employeeRepository.getById(id);
+    if (!employee) {
+      throw new createHttpError.NotFound(`Employee with id ${id} not found.`);
     }
+    return employee;
   }
 }
