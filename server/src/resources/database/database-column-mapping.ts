@@ -8,5 +8,6 @@ export const employeeColMapping: Record<keyof EmployeeEntity, string> = {
   phone: "phone",
   photo: "photo",
   address: "address",
+  isActive: "is_active",
   department: "department",
 };

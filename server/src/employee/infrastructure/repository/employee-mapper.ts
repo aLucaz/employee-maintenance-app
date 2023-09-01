@@ -11,6 +11,7 @@ export function fromEmployeeModelToDto(model: QueryResultRow): EmployeeEntity {
     phone: model.phone,
     address: model.address,
     photo: model.photo,
+    isActive: model.is_active,
     department: model.department,
   };
 }

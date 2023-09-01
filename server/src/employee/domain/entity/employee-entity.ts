@@ -6,6 +6,7 @@ export interface EmployeeEntity {
   phone: string;
   address: string;
   photo: string;
+  isActive: boolean;
   department: string;
 }
 
