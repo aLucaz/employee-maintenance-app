@@ -1,10 +1,10 @@
-import { Employee } from "./entity/employee";
+import { EmployeeEntity } from "./entity/employee-entity";
 
 export interface EmployeeRepository {
-  create(data: Employee): Promise<void>;
+  create(data: EmployeeEntity): Promise<void>;
   delete(id: number): Promise<void>;
-  getAll(): Promise<Array<Employee>>;
-  getById(id: number): Promise<Employee | null>;
-  getByNamePhone(data: Employee): Promise<Employee>;
-  update(id: number, data: Employee): Promise<void>;
+  getAll(): Promise<Array<EmployeeEntity>>;
+  getById(id: number): Promise<EmployeeEntity | null>;
+  getByNamePhone(data: EmployeeEntity): Promise<EmployeeEntity | null>;
+  update(id: number, data: EmployeeEntity): Promise<void>;
 }

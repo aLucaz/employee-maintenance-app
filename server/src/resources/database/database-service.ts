@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Client, QueryResult } from "pg";
 
-import { Employee } from "@/employee/domain/entity/employee";
+import { EmployeeEntity } from "@/employee/domain/entity/employee-entity";
 import { employeeColMapping } from "@/resources/database/database-column-mapping";
 
 import Environment from "../environment";
@@ -21,7 +21,7 @@ export class DatabaseService {
 
   async execute(
     query: string,
-    payload?: Partial<Employee>,
+    payload?: Partial<EmployeeEntity>,
   ): Promise<QueryResult> {
     const client = this.getConnection();
     try {
@@ -41,7 +41,7 @@ export class DatabaseService {
 
   private bindValuesToQuery(
     query: string,
-    payload?: Partial<Employee>,
+    payload?: Partial<EmployeeEntity>,
   ): string {
     if (!payload) {
       return query;
@@ -65,7 +65,10 @@ export class DatabaseService {
     return query.includes("UPDATE");
   }
 
-  private bindDataToQuery(query: string, data: Partial<Employee>): string {
+  private bindDataToQuery(
+    query: string,
+    data: Partial<EmployeeEntity>,
+  ): string {
     let bindedQuery = `${query}`;
     Object.entries(data).forEach(([key, value]) => {
       const pattern = this.getPattern(key);
@@ -76,12 +79,12 @@ export class DatabaseService {
 
   private bindUpdateStatementToQuery(
     query: string,
-    data: Partial<Employee>,
+    data: Partial<EmployeeEntity>,
   ): string {
     const setStatement = Object.entries(data)
       .map(
         ([key, value]) =>
-          `${employeeColMapping[key as keyof Employee]} = '${value}'`,
+          `${employeeColMapping[key as keyof EmployeeEntity]} = '${value}'`,
       )
       .join(", ");
     const pattern = this.getPattern("updates");

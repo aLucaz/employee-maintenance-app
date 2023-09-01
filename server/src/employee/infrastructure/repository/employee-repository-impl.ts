@@ -1,7 +1,11 @@
 import { inject, injectable } from "inversify";
 
 import { EmployeeRepository } from "@/employee/domain/employee-repository";
-import { Employee } from "@/employee/domain/entity/employee";
+import { EmployeeEntity } from "@/employee/domain/entity/employee-entity";
+import {
+  fromEmployeeModelListToDto,
+  fromEmployeeModelToDto,
+} from "@/employee/infrastructure/repository/employee-mapper";
 import { DatabaseService } from "@/resources/database/database-service";
 
 import { Types } from "../injection/types";
@@ -14,7 +18,7 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     private databaseService: DatabaseService,
   ) {}
 
-  async create(data: Employee): Promise<void> {
+  async create(data: EmployeeEntity): Promise<void> {
     await this.databaseService.execute(EmployeeQueries.CREATE, data);
   }
 
@@ -22,30 +26,33 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     await this.databaseService.execute(EmployeeQueries.DELETE, { id });
   }
 
-  async getById(id: number): Promise<Employee | null> {
+  async getById(id: number): Promise<EmployeeEntity | null> {
     const res = await this.databaseService.execute(EmployeeQueries.GET_BY_ID, {
       id,
     });
     if (res.rowCount === 0) {
       return null;
     }
-    return res.rows[0];
+    return fromEmployeeModelToDto(res.rows[0]);
   }
 
-  async getByNamePhone(data: Employee): Promise<Employee> {
+  async getByNamePhone(data: EmployeeEntity): Promise<EmployeeEntity | null> {
     const res = await this.databaseService.execute(
       EmployeeQueries.GET_BY_NAME_PHONE,
       data,
     );
-    return res.rows[0];
+    if (res.rowCount === 0) {
+      return null;
+    }
+    return fromEmployeeModelToDto(res.rows[0]);
   }
 
-  async getAll(): Promise<Array<Employee>> {
+  async getAll(): Promise<Array<EmployeeEntity>> {
     const res = await this.databaseService.execute(EmployeeQueries.GET_ALL);
-    return res.rows;
+    return fromEmployeeModelListToDto(res.rows);
   }
 
-  async update(id: number, data: Employee): Promise<void> {
+  async update(id: number, data: EmployeeEntity): Promise<void> {
     await this.databaseService.execute(EmployeeQueries.UPDATE, {
       ...data,
       id,

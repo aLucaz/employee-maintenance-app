@@ -1,7 +1,7 @@
 import createHttpError from "http-errors";
 import { inject, injectable } from "inversify";
 
-import { Employee } from "@/employee/domain/entity/employee";
+import { EmployeeEntity } from "@/employee/domain/entity/employee-entity";
 import Logger from "@/resources/logger";
 
 import { EmployeeRepository } from "../domain/employee-repository";
@@ -14,7 +14,10 @@ export class UpdateEmployeeService {
     private employeeRepository: EmployeeRepository,
   ) {}
 
-  async execute(id: number, data: Employee): Promise<Employee | null> {
+  async execute(
+    id: number,
+    data: EmployeeEntity,
+  ): Promise<EmployeeEntity | null> {
     Logger.info("Updating employee...");
     try {
       await this.employeeRepository.update(id, data);

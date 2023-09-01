@@ -1,6 +1,8 @@
 import { Container } from "inversify";
 
-import { DatabaseService } from "../../../resources/database/database-service";
+import { EmployeeDateService } from "@/employee/domain/employee-date-service";
+import { DatabaseService } from "@/resources/database/database-service";
+
 import { CreateEmployeeService } from "../../application/create-employee-service";
 import { DeleteEmployeeService } from "../../application/delete-employee-service";
 import { GetAllEmployeesService } from "../../application/get-all-employees-service";
@@ -35,6 +37,9 @@ container
 container
   .bind<UpdateEmployeeService>(Types.UpdateEmployeeService)
   .to(UpdateEmployeeService);
+container
+  .bind<EmployeeDateService>(Types.EmployeeDateService)
+  .to(EmployeeDateService);
 // database
 container
   .bind<DatabaseService>(Types.PostgresDatabaseService)

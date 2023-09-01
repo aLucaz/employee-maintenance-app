@@ -6,5 +6,6 @@ export const Types = {
   GetAllEmployeesService: Symbol.for("GetAllEmployeesService"),
   GetEmployeeService: Symbol.for("GetEmployeeService"),
   UpdateEmployeeService: Symbol.for("UpdateEmployeeService"),
+  EmployeeDateService: Symbol.for("EmployeeDateService"),
   PostgresDatabaseService: Symbol.for("DatabaseService"),
 };

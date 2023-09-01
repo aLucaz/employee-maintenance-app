@@ -1,10 +1,12 @@
-import { Employee } from "@/employee/domain/entity/employee";
+import { EmployeeEntity } from "@/employee/domain/entity/employee-entity";
 
-export const employeeColMapping: Record<keyof Employee, string> = {
+export const employeeColMapping: Record<keyof EmployeeEntity, string> = {
   id: "id",
   firstName: "first_name",
   lastName: "last_name",
   hireDate: "hire_date",
   phone: "phone",
+  photo: "photo",
   address: "address",
+  department: "department",
 };
