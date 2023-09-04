@@ -1,7 +1,7 @@
 import { type Employee } from '../../types/Employee'
 import { Box, CardContent, Grid, Typography } from '@mui/material'
 
-function EmployeeInfoBox (employee: Partial<Employee>) {
+function EmployeeInfoBox (employee: Employee) {
   return (
     <>
       <Grid item md={8}>

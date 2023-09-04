@@ -13,6 +13,7 @@ export function fromEmployeeModelToDto(model: QueryResultRow): EmployeeEntity {
     photo: model.photo,
     isActive: model.is_active,
     department: model.department,
+    idDepartment: model.idDepartment,
   };
 }
 

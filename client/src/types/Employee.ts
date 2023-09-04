@@ -13,6 +13,7 @@ export interface Employee {
   photo: string
   address: string
   department: string
+  idDepartment: number
   isActive: boolean
   formattedHireDate: string
   hireDuration: Duration

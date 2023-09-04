@@ -20,7 +20,11 @@ function EmployeeDialogBox (employee: Employee) {
         <Button variant="contained" color="info" onClick={handleOpen}>
           View Details
         </Button>
-        <EmployeeDetailsModal employee={employee} handleClose={handleClose} openDetails={openDetails}/>
+        <EmployeeDetailsModal
+          employee={employee}
+          handleClose={handleClose}
+          openDetails={openDetails}
+        />
       </Grid>
     </>
   )

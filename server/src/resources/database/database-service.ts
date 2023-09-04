@@ -1,11 +1,14 @@
 import { injectable } from "inversify";
 import { Client, QueryResult } from "pg";
 
+import { EmployeeInDepartmentEntity } from "@/department/domain/entity/employee-in-department-entity";
 import { EmployeeEntity } from "@/employee/domain/entity/employee-entity";
 import { employeeColMapping } from "@/resources/database/database-column-mapping";
 
 import Environment from "../environment";
 import Logger from "../logger";
+
+type Payload = Partial<EmployeeEntity> | Partial<EmployeeInDepartmentEntity>;
 
 @injectable()
 export class DatabaseService {
@@ -19,10 +22,7 @@ export class DatabaseService {
     });
   }
 
-  async execute(
-    query: string,
-    payload?: Partial<EmployeeEntity>,
-  ): Promise<QueryResult> {
+  async execute(query: string, payload?: Payload): Promise<QueryResult> {
     const client = this.getConnection();
     try {
       await client.connect();
@@ -39,10 +39,7 @@ export class DatabaseService {
     }
   }
 
-  private bindValuesToQuery(
-    query: string,
-    payload?: Partial<EmployeeEntity>,
-  ): string {
+  private bindValuesToQuery(query: string, payload?: Payload): string {
     if (!payload) {
       return query;
     }
@@ -52,7 +49,7 @@ export class DatabaseService {
       bindedQuery = this.bindIdToQuery(bindedQuery, id);
     }
     if (data) {
-      if (this.isUpdateQuery(query)) {
+      if (this.isDynamicUpdateQuery(query)) {
         bindedQuery = this.bindUpdateStatementToQuery(bindedQuery, data);
       } else {
         bindedQuery = this.bindDataToQuery(bindedQuery, data);
@@ -61,26 +58,23 @@ export class DatabaseService {
     return bindedQuery;
   }
 
-  private isUpdateQuery(query: string): boolean {
-    return query.includes("UPDATE");
+  private isDynamicUpdateQuery(query: string): boolean {
+    return query.includes("SET :updates");
   }
 
-  private bindDataToQuery(
-    query: string,
-    data: Partial<EmployeeEntity>,
-  ): string {
+  private bindDataToQuery(query: string, data: Payload): string {
     let bindedQuery = `${query}`;
+
+    Logger.info(bindedQuery);
     Object.entries(data).forEach(([key, value]) => {
       const pattern = this.getPattern(key);
       bindedQuery = bindedQuery.replace(pattern, `'${value}'`);
     });
+    Logger.info(bindedQuery);
     return bindedQuery;
   }
 
-  private bindUpdateStatementToQuery(
-    query: string,
-    data: Partial<EmployeeEntity>,
-  ): string {
+  private bindUpdateStatementToQuery(query: string, data: Payload): string {
     const setStatement = Object.entries(data)
       .map(
         ([key, value]) =>

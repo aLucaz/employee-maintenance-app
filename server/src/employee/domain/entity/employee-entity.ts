@@ -8,6 +8,7 @@ export interface EmployeeEntity {
   photo: string;
   isActive: boolean;
   department: string;
+  idDepartment: number;
 }
 
 export interface Duration {

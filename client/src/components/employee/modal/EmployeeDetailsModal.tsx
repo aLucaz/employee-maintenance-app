@@ -1,7 +1,7 @@
 import { type Employee } from '../../../types/Employee'
 import { Dialog, DialogContent, DialogTitle, Divider, IconButton, Stack } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import EmployeeModalAvatar from '../EmployeeModalAvatar'
+import EmployeeModalAvatar from './EmployeeModalAvatar'
 import EmployeePersonalInfoBox from './EmployeePersonalInfoBox'
 import EmployeeHiringInfo from './EmployeeHiringInfo'
 
@@ -17,6 +17,8 @@ function EmployeeDetailsModal ({ employee, openDetails, handleClose }: Props) {
       <Dialog
         onClose={handleClose}
         open={openDetails}
+        fullWidth
+        maxWidth={'md'}
       >
         <DialogTitle>
           Employee Details
@@ -31,14 +33,15 @@ function EmployeeDetailsModal ({ employee, openDetails, handleClose }: Props) {
         >
           <CloseIcon />
         </IconButton>
-        <DialogContent>
-          <Stack direction={'row'} columnGap={1}>
+        <DialogContent dividers>
+          <Stack direction={'row'} columnGap={5} justifyContent={'center'}>
             <EmployeeModalAvatar
               photo={employee.photo}
               isActive={employee.isActive}
             />
             <EmployeePersonalInfoBox {...employee}/>
             <EmployeeHiringInfo
+              id={employee.id}
               isActive={employee.isActive}
               formattedHireDate={employee.formattedHireDate}
               hireDuration={employee.hireDuration}

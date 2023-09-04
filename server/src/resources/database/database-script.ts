@@ -18,12 +18,11 @@ CREATE TABLE IF NOT EXISTS department (
 
 CREATE TABLE IF NOT EXISTS employee_in_department (
     id serial primary key,
-    id_employee integer references employee(id) ,
+    id_employee integer references employee(id),
     id_department integer references department(id),
     start_date date not null,
     end_date date,
-    is_active boolean,
-    CONSTRAINT unique_employee_department_start UNIQUE (id_employee, id_department, start_date)
+    is_active boolean
 );
 
 -- inserting 10 random employees
@@ -51,19 +50,21 @@ VALUES
 ON CONFLICT DO NOTHING;
 
 -- associating employees with departments
-INSERT INTO employee_in_department (id_employee, id_department, start_date, end_date, is_active)
+INSERT INTO employee_in_department (id, id_employee, id_department, start_date, end_date, is_active)
 VALUES
-    (1, 1, '2022-01-01', NULL, true),
-    (2, 2, '2022-02-01', NULL, true),
-    (3, 3, '2022-03-01', NULL, true),
-    (4, 4, '2022-04-01', NULL, true),
-    (5, 5, '2022-05-01', NULL, true),
-    (6, 1, '2022-06-01', NULL, true),
-    (7, 2, '2022-07-01', NULL, true),
-    (8, 3, '2022-08-01', NULL, true),
-    (9, 4, '2022-09-01', NULL, true),
-    (10, 5, '2022-10-01', NULL, true)
+    (1, 1, 1, '2022-01-01', NULL, true),
+    (2, 2, 2, '2022-02-01', NULL, true),
+    (3, 3, 3, '2022-03-01', NULL, true),
+    (4, 4, 4, '2022-04-01', NULL, true),
+    (5, 5, 5, '2022-05-01', NULL, true),
+    (6, 6, 1, '2022-06-01', NULL, true),
+    (7, 7, 2, '2022-07-01', NULL, true),
+    (8, 8, 3, '2022-08-01', NULL, true),
+    (9, 9, 4, '2022-09-01', NULL, true),
+    (10, 10, 5, '2022-10-01', NULL, true)
 ON CONFLICT DO NOTHING;
+
+ALTER SEQUENCE employee_in_department_id_seq RESTART WITH 100;
 `;
 
 export default script;

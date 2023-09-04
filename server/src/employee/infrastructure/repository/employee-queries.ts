@@ -9,11 +9,12 @@ class EmployeeQueries {
   `;
 
   GET_BY_ID = `
-    SELECT e.*, d.name AS department
+    SELECT e.*, d.name AS department, d.id AS "idDepartment"
     FROM employee AS e
     INNER JOIN employee_in_department eid on e.id = eid.id_employee
     INNER JOIN department d on d.id = eid.id_department
-    WHERE e.id = :id
+    WHERE e.id = :id AND
+          eid.is_active = true
   `;
 
   GET_BY_NAME_PHONE = `
@@ -25,10 +26,11 @@ class EmployeeQueries {
   `;
 
   GET_ALL = `
-    SELECT e.*, d.name AS department
+    SELECT e.*, d.name AS department, d.id AS "idDepartment"
     FROM employee AS e
     INNER JOIN employee_in_department eid on e.id = eid.id_employee
     INNER JOIN department d on d.id = eid.id_department
+    WHERE eid.is_active = true
     ORDER BY id;
   `;
 

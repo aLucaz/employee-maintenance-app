@@ -20,7 +20,7 @@ export class GetAllEmployeesService {
   ) {}
 
   async execute(): Promise<Array<EmployeeEntity & EmployeeResponse>> {
-    Logger.info("Searching tasks...");
+    Logger.info("Searching employees...");
     const employees = await this.employeeRepository.getAll();
     return this.employeeDateService.addResponseInfoToEntityList(employees);
   }

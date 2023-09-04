@@ -2,8 +2,12 @@ import { Container, Grid } from '@mui/material'
 import { type Employee } from '../types/Employee'
 import EmployeeCard from '../components/employee/EmployeeCard'
 import TitledBox from '../components/shared/TitledBox'
+import { useContext } from 'react'
+import { EmployeeContext } from '../context/employee-context'
 
-function EmployeesPanel ({ employeeList }: { employeeList: Employee[] }) {
+function EmployeesPanel () {
+  const { employeeList } = useContext(EmployeeContext)
+
   return (
     <>
       <Container>

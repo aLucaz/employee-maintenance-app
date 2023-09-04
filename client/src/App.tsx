@@ -1,9 +1,23 @@
 import EmployeesPanel from './pages/EmployeesPanel'
 import { useEffect, useState } from 'react'
 import axios from './helper/axios-config'
+import { EmployeeContext } from './context/employee-context'
+import { type Employee } from './types/Employee'
 
 function App () {
-  const [employeeList, setEmployeeList] = useState([])
+  const [employeeList, setEmployeeList] = useState<Employee[]>([])
+
+  const updateEmployeeById = (id: number, updatedEmployee: Employee) => {
+    setEmployeeList((prevEmployees) => {
+      return prevEmployees.map(employee =>
+        employee.id === id ? updatedEmployee : employee
+      )
+    })
+  }
+
+  const getEmployeeById = (id: number) => {
+    return employeeList.find((employee) => employee.id === id)
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -25,7 +39,9 @@ function App () {
 
   return (
     <>
-      <EmployeesPanel employeeList={employeeList}/>
+      <EmployeeContext.Provider value={{ employeeList, updateEmployeeById, getEmployeeById }}>
+        <EmployeesPanel/>
+      </EmployeeContext.Provider>
     </>
   )
 }

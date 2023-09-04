@@ -1,8 +1,8 @@
-import { type Employee } from '../../types/Employee'
 import { Card, Grid } from '@mui/material'
 import EmployeeDialogBox from './EmployeeDialogBox'
 import EmployeeCardPhoto from './EmployeeCardPhoto'
 import EmployeeInfoBox from './EmployeeInfoBox'
+import { type Employee } from '../../types/Employee'
 
 function EmployeeCard (employee: Employee) {
   return (
