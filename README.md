@@ -9,6 +9,16 @@ please run it using `docker` to avoid any possible error.
 - [Client Docs](./client/README.md)
 - [Server Docs](./server/README.md)
 
+## Technologies used
+
+- Docker
+- Make
+- React (v18)
+- Typescript
+- Node.js (v18)
+- Express.js
+- Postgres
+
 ## How to run the app?
 
 using `make`

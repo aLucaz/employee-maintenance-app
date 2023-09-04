@@ -8,7 +8,7 @@ please run it using `docker` to avoid any possible error.
 
 - Docker
 - Make
-- React
+- React (v18)
 - Typescript
 
 ## How to run the client?
