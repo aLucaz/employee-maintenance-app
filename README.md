@@ -6,8 +6,8 @@ please run it using `docker` to avoid any possible error.
 
 ## Client & Server
 
-[Client Docs](./client/README.md)
-[Server Docs](./server/README.md)
+- [Client Docs](./client/README.md)
+- [Server Docs](./server/README.md)
 
 ## How to run the app?
 
