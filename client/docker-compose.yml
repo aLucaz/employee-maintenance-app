@@ -1,0 +1,11 @@
+services:
+  client:
+    container_name: ema_client
+    platform: linux/amd64
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - VITE_APP_API_URL=http://server:8000/api
