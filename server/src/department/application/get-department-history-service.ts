@@ -16,7 +16,10 @@ export class GetDepartmentHistoryService {
   async execute(
     idEmployee: number,
   ): Promise<Array<EmployeeInDepartmentEntity>> {
-    Logger.info("Searching employees...");
-    return this.departmentRepository.getDepartmentHistory(idEmployee);
+    Logger.info("Searching history...");
+    const hola =
+      await this.departmentRepository.getDepartmentHistory(idEmployee);
+    Logger.info("History generated.");
+    return hola;
   }
 }

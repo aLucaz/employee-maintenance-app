@@ -38,7 +38,6 @@ function EmployeeHiringInfo (employee: EmployeeProps) {
     axios.put(`/employee/${employee.id}`, {
       isActive: !employee.isActive
     }).then((res) => {
-      console.log(JSON.stringify(res.data, null, 2))
       updateEmployeeById(employee.id, res.data)
     }).catch((error) => {
       console.error('Request failed:', error.message)

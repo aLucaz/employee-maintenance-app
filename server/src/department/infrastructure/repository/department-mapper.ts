@@ -10,8 +10,9 @@ export function fromModelToDto(
     id: model.id,
     idEmployee: model.id_employee,
     idDepartment: model.id_department,
+    departmentName: model.departmentName,
     startDate: format(model.start_date, "yyyy-MM-dd"),
-    endDate: format(model.end_date, "yyyy-MM-dd"),
+    endDate: model.end_date ? format(model.end_date, "yyyy-MM-dd") : "present",
     isActive: model.is_active,
   };
 }

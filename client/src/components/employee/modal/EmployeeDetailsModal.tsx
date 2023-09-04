@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import EmployeeModalAvatar from './EmployeeModalAvatar'
 import EmployeePersonalInfoBox from './EmployeePersonalInfoBox'
 import EmployeeHiringInfo from './EmployeeHiringInfo'
+import EmployeeDepartmentHistory from './EmployeeDepartmentHistory'
 
 interface Props {
   employee: Employee
@@ -48,6 +49,10 @@ function EmployeeDetailsModal ({ employee, openDetails, handleClose }: Props) {
             />
           </Stack>
           <Divider/>
+          <EmployeeDepartmentHistory
+            employeeId={employee.id}
+            departmentId={employee.idDepartment}
+          />
         </DialogContent>
       </Dialog>
     </>

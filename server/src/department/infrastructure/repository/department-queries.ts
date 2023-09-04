@@ -8,7 +8,7 @@ class DepartmentQueries {
   DEACTIVATE_CURRENT_DEPARTMENT = `
     UPDATE employee_in_department
     SET is_active = false,
-        end_date = LOCALTIMESTAMP
+        end_date = CURRENT_DATE
     WHERE id_employee = :idEmployee;
   `;
 
@@ -26,10 +26,11 @@ class DepartmentQueries {
   `;
 
   SEARCH_EMPLOYEE_HISTORY = `
-    SELECT *
-    FROM employee_in_department
+    SELECT eid.*, d.name AS "departmentName"
+    FROM employee_in_department eid
+    INNER JOIN department d on d.id = eid.id_department
     WHERE id_employee = :idEmployee
-    ORDER BY start_date DESC
+    ORDER BY start_date DESC, is_active DESC;
   `;
 }
 

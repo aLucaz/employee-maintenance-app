@@ -27,7 +27,6 @@ function EmployeeDepartmentSelect ({ currIdEmployee, currIdDepartment }: Props) 
       idEmployee: currIdEmployee,
       idDepartment: newIdDepartment
     }).then((res) => {
-      console.log(JSON.stringify(res.data, null, 2))
       updateEmployeeById(currIdEmployee, res.data)
     }).catch((error) => {
       console.error('Request failed:', error.message)
