@@ -7,5 +7,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    environment:
-      - VITE_APP_API_URL=http://server:8000/api

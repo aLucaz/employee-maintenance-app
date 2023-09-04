@@ -7,6 +7,8 @@ import { type Employee } from './types/Employee'
 function App () {
   const [employeeList, setEmployeeList] = useState<Employee[]>([])
 
+  console.log(import.meta.env.VITE_APP_API_URL)
+
   const updateEmployeeById = (id: number, updatedEmployee: Employee) => {
     setEmployeeList((prevEmployees) => {
       return prevEmployees.map(employee =>
