@@ -1,3 +1,4 @@
+import createHttpError from "http-errors";
 import { inject, injectable } from "inversify";
 
 import { EmployeeDateService } from "@/employee/domain/employee-date-service";
@@ -21,14 +22,16 @@ export class CreateEmployeeService {
 
   async execute(
     data: EmployeeEntity,
-  ): Promise<(EmployeeEntity & EmployeeResponse) | NonNullable<unknown>> {
-    Logger.info("Creating employee...");
-    await this.employeeRepository.create(data);
-    Logger.info("Employee created.");
-    const employee = await this.employeeRepository.getByNamePhone(data);
-    if (!employee) {
-      return {};
+  ): Promise<EmployeeEntity & EmployeeResponse> {
+    const res = await this.employeeRepository.getByNamePhone(data);
+    if (res) {
+      throw new createHttpError.InternalServerError(
+        `Employee ${data.firstName} already exist.`,
+      );
     }
+    Logger.info("Creating employee...");
+    const employee = await this.employeeRepository.create(data);
+    Logger.info("Employee created.");
     return this.employeeDateService.addResponseInfoToEntity(employee);
   }
 }

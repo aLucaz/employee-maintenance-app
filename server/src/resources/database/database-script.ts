@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS employee (
     phone varchar(12),
     address varchar(50),
     photo varchar(50),
-    is_active boolean,
+    is_active boolean default true,
     CONSTRAINT unique_name_phone UNIQUE (first_name, last_name, phone)
 );
 

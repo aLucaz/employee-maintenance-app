@@ -18,8 +18,12 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     private databaseService: DatabaseService,
   ) {}
 
-  async create(data: EmployeeEntity): Promise<void> {
-    await this.databaseService.execute(EmployeeQueries.CREATE, data);
+  async create(data: EmployeeEntity): Promise<EmployeeEntity> {
+    const res = await this.databaseService.execute(
+      EmployeeQueries.CREATE,
+      data,
+    );
+    return res.rows[0];
   }
 
   async delete(id: number): Promise<void> {

@@ -1,7 +1,15 @@
 class EmployeeQueries {
   CREATE = `
-    INSERT INTO employee (first_name, last_name, hire_date, phone, address, photo) 
-    VALUES (:firstName, :lastName, :hireDate, :phone, :address, :photo)`;
+    INSERT INTO employee (first_name, last_name, hire_date, phone, address, photo)
+    VALUES (:firstName, :lastName, :hireDate, :phone, :address, :photo) 
+    RETURNING
+      first_name AS "firstName",
+      last_name AS "lastName",
+      hire_date AS "hireDate",
+      phone,
+      address,
+      photo;
+  `;
 
   DELETE = `
     DELETE FROM employee

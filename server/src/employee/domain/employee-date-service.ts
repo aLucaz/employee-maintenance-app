@@ -43,6 +43,11 @@ export class EmployeeDateService {
     };
   }
 
+  /**
+   * This method calculates hire duration & adds format to the hireDate.
+   * @param {EmployeeEntity} employee - The employee base data.
+   * @returns {EmployeeEntity & EmployeeResponse} The employee with the additional information
+   */
   addResponseInfoToEntity(
     employee: EmployeeEntity,
   ): EmployeeEntity & EmployeeResponse {
@@ -54,6 +59,13 @@ export class EmployeeDateService {
     };
   }
 
+  /**
+   * This method calculates hire duration & adds format to the hireDate
+   * for every employee in a list.
+   * @param {Array<EmployeeEntity>} employees - The employee list.
+   * @returns {Array<EmployeeEntity & EmployeeResponse>} The employee list with the
+   * additional information.
+   */
   addResponseInfoToEntityList(
     employees: Array<EmployeeEntity>,
   ): Array<EmployeeEntity & EmployeeResponse> {

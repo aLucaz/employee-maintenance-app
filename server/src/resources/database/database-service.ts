@@ -64,13 +64,10 @@ export class DatabaseService {
 
   private bindDataToQuery(query: string, data: Payload): string {
     let bindedQuery = `${query}`;
-
-    Logger.info(bindedQuery);
     Object.entries(data).forEach(([key, value]) => {
       const pattern = this.getPattern(key);
       bindedQuery = bindedQuery.replace(pattern, `'${value}'`);
     });
-    Logger.info(bindedQuery);
     return bindedQuery;
   }
 
