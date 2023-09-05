@@ -2,10 +2,6 @@ import { inject, injectable } from "inversify";
 
 import { EmployeeRepository } from "@/employee/domain/employee-repository";
 import { EmployeeEntity } from "@/employee/domain/entity/employee-entity";
-import {
-  fromEmployeeModelListToDto,
-  fromEmployeeModelToDto,
-} from "@/employee/infrastructure/repository/employee-mapper";
 import { DatabaseService } from "@/resources/database/database-service";
 
 import { Types } from "../injection/types";
@@ -37,7 +33,7 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     if (res.rowCount === 0) {
       return null;
     }
-    return fromEmployeeModelToDto(res.rows[0]);
+    return res.rows[0];
   }
 
   async getByNamePhone(data: EmployeeEntity): Promise<EmployeeEntity | null> {
@@ -48,12 +44,12 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     if (res.rowCount === 0) {
       return null;
     }
-    return fromEmployeeModelToDto(res.rows[0]);
+    return res.rows[0];
   }
 
   async getAll(): Promise<Array<EmployeeEntity>> {
     const res = await this.databaseService.execute(EmployeeQueries.GET_ALL);
-    return fromEmployeeModelListToDto(res.rows);
+    return res.rows;
   }
 
   async update(id: number, data: EmployeeEntity): Promise<void> {

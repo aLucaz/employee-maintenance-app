@@ -17,7 +17,17 @@ class EmployeeQueries {
   `;
 
   GET_BY_ID = `
-    SELECT e.*, d.name AS department, d.id AS "idDepartment"
+    SELECT 
+      e.id,
+      e.first_name AS "firstName",
+      e.last_name AS "lastName",
+      e.hire_date AS "hireDate",
+      e.phone,
+      e.address,
+      e.photo,
+      e.is_active AS "isActive",
+      d.name AS department,
+      d.id AS "idDepartment"
     FROM employee AS e
     INNER JOIN employee_in_department eid on e.id = eid.id_employee
     INNER JOIN department d on d.id = eid.id_department
@@ -26,7 +36,7 @@ class EmployeeQueries {
   `;
 
   GET_BY_NAME_PHONE = `
-    SELECT * 
+    SELECT id
     FROM employee 
     WHERE first_name = :firstName AND
           last_name = :lastName AND
@@ -34,7 +44,17 @@ class EmployeeQueries {
   `;
 
   GET_ALL = `
-    SELECT e.*, d.name AS department, d.id AS "idDepartment"
+    SELECT
+      e.id,
+      e.first_name AS "firstName",
+      e.last_name AS "lastName",
+      e.hire_date AS "hireDate",
+      e.phone,
+      e.address,
+      e.photo,
+      e.is_active AS "isActive",
+      d.name AS department,
+      d.id AS "idDepartment"
     FROM employee AS e
     INNER JOIN employee_in_department eid on e.id = eid.id_employee
     INNER JOIN department d on d.id = eid.id_department
