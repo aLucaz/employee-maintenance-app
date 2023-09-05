@@ -41,12 +41,7 @@ function EmployeeDetailsModal ({ employee, openDetails, handleClose }: Props) {
               isActive={employee.isActive}
             />
             <EmployeePersonalInfoBox {...employee}/>
-            <EmployeeHiringInfo
-              id={employee.id}
-              isActive={employee.isActive}
-              formattedHireDate={employee.formattedHireDate}
-              hireDuration={employee.hireDuration}
-            />
+            <EmployeeHiringInfo {...employee}/>
           </Stack>
           <Divider/>
           <EmployeeDepartmentHistory

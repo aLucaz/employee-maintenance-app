@@ -52,10 +52,11 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     return res.rows;
   }
 
-  async update(id: number, data: EmployeeEntity): Promise<void> {
-    await this.databaseService.execute(EmployeeQueries.UPDATE, {
+  async update(id: number, data: EmployeeEntity): Promise<EmployeeEntity> {
+    const res = await this.databaseService.execute(EmployeeQueries.UPDATE, {
       ...data,
       id,
     });
+    return res.rows[0];
   }
 }

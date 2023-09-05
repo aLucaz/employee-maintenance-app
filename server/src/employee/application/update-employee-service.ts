@@ -1,3 +1,4 @@
+import createHttpError from "http-errors";
 import { inject, injectable } from "inversify";
 
 import {
@@ -22,14 +23,14 @@ export class UpdateEmployeeService {
   async execute(
     id: number,
     data: EmployeeEntity,
-  ): Promise<(EmployeeEntity & EmployeeResponse) | NonNullable<unknown>> {
-    Logger.info("Updating employee...");
-    await this.employeeRepository.update(id, data);
-    Logger.info("Employee updated.");
-    const employee = await this.employeeRepository.getById(id);
-    if (!employee) {
-      return {};
+  ): Promise<EmployeeEntity & EmployeeResponse> {
+    const res = await this.employeeRepository.getById(id);
+    if (!res) {
+      throw new createHttpError.NotFound(`Employee with id ${id} not found.`);
     }
+    Logger.info("Updating employee...");
+    const employee = await this.employeeRepository.update(id, data);
+    Logger.info("Employee updated.");
     return this.employeeDateService.addResponseInfoToEntity(employee);
   }
 }

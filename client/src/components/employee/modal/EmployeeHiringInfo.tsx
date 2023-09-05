@@ -29,16 +29,15 @@ const buttonStyles = {
   }
 }
 
-type EmployeeProps = Pick<Employee, 'id' | 'formattedHireDate' | 'hireDuration' | 'isActive'>
-
-function EmployeeHiringInfo (employee: EmployeeProps) {
+function EmployeeHiringInfo (employee: Employee) {
   const { updateEmployeeById } = useContext(EmployeeContext)
 
   const handleClick = () => {
+    const isActive = !employee.isActive
     axios.put(`/employee/${employee.id}`, {
-      isActive: !employee.isActive
-    }).then((res) => {
-      updateEmployeeById(employee.id, res.data)
+      isActive
+    }).then(() => {
+      updateEmployeeById(employee.id, { ...employee, isActive })
     }).catch((error) => {
       console.error('Request failed:', error.message)
     })

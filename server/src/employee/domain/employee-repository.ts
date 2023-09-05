@@ -6,5 +6,5 @@ export interface EmployeeRepository {
   getAll(): Promise<Array<EmployeeEntity>>;
   getById(id: number): Promise<EmployeeEntity | null>;
   getByNamePhone(data: EmployeeEntity): Promise<EmployeeEntity | null>;
-  update(id: number, data: EmployeeEntity): Promise<void>;
+  update(id: number, data: EmployeeEntity): Promise<EmployeeEntity>;
 }

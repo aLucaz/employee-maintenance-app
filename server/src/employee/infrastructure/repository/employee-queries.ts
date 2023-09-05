@@ -8,7 +8,8 @@ class EmployeeQueries {
       hire_date AS "hireDate",
       phone,
       address,
-      photo;
+      photo,
+      is_active AS "isActive",
   `;
 
   DELETE = `
@@ -59,13 +60,21 @@ class EmployeeQueries {
     INNER JOIN employee_in_department eid on e.id = eid.id_employee
     INNER JOIN department d on d.id = eid.id_department
     WHERE eid.is_active = true
-    ORDER BY id;
+    ORDER BY id
   `;
 
   UPDATE = `
     UPDATE employee
     SET :updates
-    WHERE id = :id;
+    WHERE id = :id
+    RETURNING
+      first_name AS "firstName",
+      last_name AS "lastName",
+      hire_date AS "hireDate",
+      phone,
+      address,
+      photo,
+      is_active AS "isActive"
   `;
 }
 
