@@ -1,7 +1,7 @@
 class EmployeeQueries {
   CREATE = `
     INSERT INTO employee (first_name, last_name, hire_date, phone, address, photo)
-    VALUES (:firstName, :lastName, :hireDate, :phone, :address, :photo) 
+    VALUES ($1, $2, $3, $4, $5, $6) 
     RETURNING
       first_name AS "firstName",
       last_name AS "lastName",
@@ -9,7 +9,7 @@ class EmployeeQueries {
       phone,
       address,
       photo,
-      is_active AS "isActive",
+      is_active AS "isActive"
   `;
 
   DELETE = `

@@ -39,6 +39,22 @@ export class DatabaseService {
     }
   }
 
+  async executeSecure(query: string, values: unknown[]): Promise<QueryResult> {
+    const client = this.getConnection();
+    try {
+      await client.connect();
+      Logger.info(`Running secure query: ${query}`);
+      const res = await client.query(query, values);
+      Logger.info("Query executed.");
+      return res;
+    } catch (err) {
+      Logger.error("Error executing query:", err);
+      throw err;
+    } finally {
+      await client.end();
+    }
+  }
+
   private bindValuesToQuery(query: string, payload?: Payload): string {
     if (!payload) {
       return query;

@@ -15,9 +15,17 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
   ) {}
 
   async create(data: EmployeeEntity): Promise<EmployeeEntity> {
-    const res = await this.databaseService.execute(
+    const values = [
+      data.firstName,
+      data.lastName,
+      data.hireDate,
+      data.phone,
+      data.address,
+      data.photo,
+    ];
+    const res = await this.databaseService.executeSecure(
       EmployeeQueries.CREATE,
-      data,
+      values,
     );
     return res.rows[0];
   }
