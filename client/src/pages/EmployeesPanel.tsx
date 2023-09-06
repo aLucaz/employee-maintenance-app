@@ -1,6 +1,6 @@
 import { Container, Grid } from '@mui/material'
 import { type Employee } from '../types/Employee'
-import EmployeeCard from '../components/employee/EmployeeCard'
+import EmployeeCard from '../components/employee/card/EmployeeCard'
 import TitledBox from '../components/shared/TitledBox'
 import { useContext } from 'react'
 import { EmployeeContext } from '../context/employee-context'

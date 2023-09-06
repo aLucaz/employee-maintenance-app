@@ -1,7 +1,7 @@
 import { Button, Grid } from '@mui/material'
 import { useState } from 'react'
-import { type Employee } from '../../types/Employee'
-import EmployeeDetailsModal from './modal/EmployeeDetailsModal'
+import { type Employee } from '../../../types/Employee'
+import EmployeeDetailsModal from '../modal/EmployeeDetailsModal'
 
 function EmployeeDialogBox (employee: Employee) {
   const [openDetails, setOpenDetails] = useState(false)
