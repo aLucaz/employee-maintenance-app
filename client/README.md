@@ -16,6 +16,10 @@ This is the frontend of the employee maintenance app.
 - DRY
 - Modularization
 
+## File structure
+
+![structure](./assets/image.png)
+
 ## How to run the client?
 
 *please run it using `docker` to avoid any possible error.*

@@ -21,6 +21,10 @@ This is the backend of the employee maintenance app.
 - DRY
 - Repository pattern
 
+## File structure
+
+![structure](./assets/image.png)
+
 ## How to run the server?
 
 *please run it using `docker` to avoid any possible error.*
