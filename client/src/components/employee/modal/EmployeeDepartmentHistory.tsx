@@ -1,6 +1,5 @@
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import axios from '../../../helper/axios-config'
-import { useEffect, useState } from 'react'
+import useDataLoader from '../../../hooks/use-data-loader'
 
 interface History {
   id: number
@@ -11,30 +10,12 @@ interface History {
 }
 
 function EmployeeDepartmentHistory ({ employeeId, departmentId }: { employeeId: number, departmentId: number }) {
-  const [history, setHistory] = useState<History[]>([])
-
-  useEffect(() => {
-    const controller = new AbortController()
-    void axios.get(`/department/history/${employeeId}`, { signal: controller.signal })
-      .then((res) => {
-        console.log(res.data)
-        setHistory(res.data)
-      }).catch((error) => {
-        if (error.name === 'CanceledError') {
-          console.log('Request was', error.message)
-        } else {
-          console.error('Request failed:', error.message)
-        }
-      })
-    return () => {
-      controller.abort()
-    }
-  }, [departmentId])
+  const [history] = useDataLoader<History>(`/department/history/${employeeId}`, [departmentId])
 
   return (
     <Box sx={{ marginTop: '2vh' }}>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="employee history table">
           <TableHead>
             <TableRow>
               <TableCell>Start Date</TableCell>

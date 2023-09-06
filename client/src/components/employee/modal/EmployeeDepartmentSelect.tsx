@@ -1,7 +1,8 @@
 import { Button, FormControl, FormHelperText, MenuItem, Select, Stack, type SelectChangeEvent } from '@mui/material'
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { EmployeeContext } from '../../../context/employee-context'
+import useDataLoader from '../../../hooks/use-data-loader'
 
 interface Department {
   id: number
@@ -14,8 +15,8 @@ interface Props {
 }
 
 function EmployeeDepartmentSelect ({ currIdEmployee, currIdDepartment }: Props) {
-  const [departmentList, setDepartmentList] = useState([{ id: 0, name: '' }])
-  const [newIdDepartment, setNewIdDepartment] = useState(0)
+  const [departmentList] = useDataLoader<Department>('/department')
+  const [newIdDepartment, setNewIdDepartment] = useState(currIdDepartment)
   const { updateEmployeeById } = useContext(EmployeeContext)
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -33,42 +34,27 @@ function EmployeeDepartmentSelect ({ currIdEmployee, currIdDepartment }: Props) 
     })
   }
 
-  useEffect(() => {
-    const controller = new AbortController()
-    void axios.get('/department', { signal: controller.signal })
-      .then((res) => {
-        setNewIdDepartment(currIdDepartment)
-        setDepartmentList(res.data)
-      }).catch((error) => {
-        if (error.name === 'CanceledError') {
-          console.log('Request was', error.message)
-        } else {
-          console.error('Request failed:', error.message)
-        }
-      })
-    return () => {
-      controller.abort()
-    }
-  }, [])
-
   return (
     <Stack sx={{ marginTop: '1vh' }} direction={'row'} columnGap={1} alignItems={'start'}>
-      <FormControl>
-        <Select
-          value={newIdDepartment.toString()}
-          onChange={handleChange}
-          sx={{ height: '4vh', width: '15vw' }}
-        >
-          {
-            departmentList.map((department: Department) => (
-              <MenuItem key={department.id} value={department.id.toString()}>
-                {department.name}
-              </MenuItem>
-            ))
-          }
-        </Select>
-        <FormHelperText sx={{ marginLeft: 0 }}> Select a department </FormHelperText>
-      </FormControl>
+      {
+        departmentList.length > 0 &&
+        <FormControl>
+          <Select
+            value={newIdDepartment.toString()}
+            onChange={handleChange}
+            sx={{ height: '4vh', width: '15vw' }}
+          >
+            {
+              departmentList.map((department: Department) => (
+                <MenuItem key={department.id} value={department.id.toString()}>
+                  {department.name}
+                </MenuItem>
+              ))
+            }
+          </Select>
+          <FormHelperText sx={{ marginLeft: 0 }}> Select a department </FormHelperText>
+        </FormControl>
+      }
       <Button
         variant='contained'
         color='success'

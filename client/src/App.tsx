@@ -1,11 +1,11 @@
 import EmployeesPanel from './pages/EmployeesPanel'
-import { useEffect, useState } from 'react'
-import axios from './helper/axios-config'
 import { EmployeeContext } from './context/employee-context'
 import { type Employee } from './types/Employee'
+import useDataLoader from './hooks/use-data-loader'
+import './helper/axios-config'
 
 function App () {
-  const [employeeList, setEmployeeList] = useState<Employee[]>([])
+  const [employeeList, setEmployeeList] = useDataLoader<Employee>('/employee')
 
   const updateEmployeeById = (id: number, updatedEmployee: Employee) => {
     setEmployeeList((prevEmployees) => {
@@ -18,24 +18,6 @@ function App () {
   const getEmployeeById = (id: number) => {
     return employeeList.find((employee) => employee.id === id)
   }
-
-  useEffect(() => {
-    const controller = new AbortController()
-    void axios.get('/employee', { signal: controller.signal })
-      .then((res) => {
-        console.log(res.data)
-        setEmployeeList(res.data)
-      }).catch((error) => {
-        if (error.name === 'CanceledError') {
-          console.log('Request was', error.message)
-        } else {
-          console.error('Request failed:', error.message)
-        }
-      })
-    return () => {
-      controller.abort()
-    }
-  }, [])
 
   return (
     <>
