@@ -37,7 +37,7 @@ export class EmployeeController {
     res.status(200).json(data);
   };
 
-  listEmployees = async (req: Request, res: Response) => {
+  listEmployees = async (_req: Request, res: Response) => {
     Logger.info("__listEmployees__");
     const data = await this.getAllEmployeesService.execute();
     res.status(200).json(data);
