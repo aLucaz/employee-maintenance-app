@@ -86,6 +86,23 @@ docker-compose -f docker-compose.yml \
         down
 ```
 
+## How to test?
+
+install dependencies
+```shell
+yarn install-all
+```
+
+run tests of the client
+```shell
+yarn test:client
+```
+
+run tests of the server
+```shell
+yarn test:server
+```
+
 ## Stay in touch
 
 - Author 👷🏾‍♂️- [aLucaz](https://github.com/aLucaz)

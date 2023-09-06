@@ -55,6 +55,18 @@ docker-compose -f docker-compose.yml \
                 down
 ```
 
+## How to test the server?
+
+run tests
+```shell
+yarn test
+```
+
+generate coverage
+```shell
+yarn test:coverage
+```
+
 ## Stay in touch
 
 - Author 👷🏾‍♂️- [aLucaz](https://github.com/aLucaz)

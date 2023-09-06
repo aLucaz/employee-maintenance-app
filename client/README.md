@@ -38,7 +38,7 @@ docker-compose -f docker-compose.yml \
 
 test the app using `http://localhost:3000/`
 
-## How to remove the client?
+## How to turn off the client?
 
 using `make`
 ```shell
@@ -50,6 +50,18 @@ using `docker`
 docker-compose -f docker-compose.yml \
                 -f ./client/docker-compose.yml \
                 down
+```
+
+## How to test the client?
+
+run tests
+```shell
+yarn test
+```
+
+generate coverage
+```shell
+yarn test:coverage
 ```
 
 ## Stay in touch

@@ -5,7 +5,9 @@
     "install-all": "yarn install && cd client && yarn && cd ../server && yarn",
     "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\"",
     "dev:client": "cd client && yarn dev",
-    "dev:server": "cd server && yarn dev"
+    "test:client": "cd client && yarn test",
+    "dev:server": "cd server && yarn dev",
+    "test:server": "cd server && yarn test"
   },
   "devDependencies": {
     "concurrently": "^8.2.1"
