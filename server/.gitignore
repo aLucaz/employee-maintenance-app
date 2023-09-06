@@ -11,3 +11,7 @@ dist/
 
 # Env variables
 .env
+
+# Testing
+coverage
+jest.config.js
