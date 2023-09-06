@@ -40,6 +40,18 @@ This repository contains two projects:
 - Express.js
 - Postgres
 
+## Patterns used
+
+- Clean code
+- SOLID principles
+- DRY
+- Modularization
+- Clean architecture
+- Screaming architecture
+- DTO
+- DRY
+- Repository pattern
+
 ## How to run the app?
 
 *please run it using `docker` to avoid any possible error.*
