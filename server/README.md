@@ -1,8 +1,6 @@
 # Server
 
-This is the server app of the employee maintenance app.
-This project follows clean code and clean architecture,
-please run it using `docker` to avoid any possible error.
+This is the backend of the employee maintenance app.
 
 ## Technologies used
 
@@ -13,7 +11,19 @@ please run it using `docker` to avoid any possible error.
 - Typescript
 - Postgres
 
+## Patterns used
+
+- Clean code
+- Clean architecture
+- Screaming architecture
+- SOLID principles
+- DTO
+- DRY
+- Repository pattern
+
 ## How to run the server?
+
+*please run it using `docker` to avoid any possible error.*
 
 using `make`
 ```shell

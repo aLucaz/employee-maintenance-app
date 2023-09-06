@@ -1,10 +1,16 @@
 # Employee Maintenance App
 
-This is a employee maintenance app composed by two applications (client & server).
-This project follows good patterns and clean code,
-please run it using `docker` to avoid any possible error.
+This is a minimalistic application designed to streamline the management of essential employee information within an organization. With a primary focus on simplicity and efficiency, this MVP offers the following key features:
+
+1. **View Employee Information**: Quickly access and display fundamental details about employees, including their names, job titles, contact information, and hire dates. This feature provides an at-a-glance overview of the workforce.
+
+2. **Edit Employee Details**: Easily update critical employee information, such as their department and employment status. This functionality allows administrators or authorized personnel to make necessary adjustments in real-time.
+
+Designed as a Minimum Viable Product (MVP), this application provides essential functionality to support basic employee management needs. It simplifies the process of viewing and editing employee data while maintaining a user-friendly interface.
 
 ## Client & Server
+
+This repository contains two projects:
 
 - [Client Docs](./client/README.md)
 - [Server Docs](./server/README.md)
@@ -20,6 +26,8 @@ please run it using `docker` to avoid any possible error.
 - Postgres
 
 ## How to run the app?
+
+*please run it using `docker` to avoid any possible error.*
 
 using `make`
 ```shell

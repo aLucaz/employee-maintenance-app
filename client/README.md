@@ -1,8 +1,6 @@
 # Client
 
-This is the client app of the employee maintenance app.
-This project follows modularization principles and DRY,
-please run it using `docker` to avoid any possible error.
+This is the frontend of the employee maintenance app.
 
 ## Technologies used
 
@@ -11,7 +9,16 @@ please run it using `docker` to avoid any possible error.
 - React (v18)
 - Typescript
 
+## Patterns used
+
+- Clean code
+- SOLID principles
+- DRY
+- Modularization
+
 ## How to run the client?
+
+*please run it using `docker` to avoid any possible error.*
 
 using `make`
 ```shell
