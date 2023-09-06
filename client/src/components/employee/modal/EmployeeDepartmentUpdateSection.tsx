@@ -14,7 +14,7 @@ interface Props {
   currIdDepartment: number
 }
 
-function EmployeeDepartmentSelect ({ currIdEmployee, currIdDepartment }: Props) {
+function EmployeeDepartmentUpdateSection ({ currIdEmployee, currIdDepartment }: Props) {
   const [departmentList] = useDataLoader<Department>('/department')
   const [newIdDepartment, setNewIdDepartment] = useState(currIdDepartment)
   const { updateEmployeeById } = useContext(EmployeeContext)
@@ -35,24 +35,14 @@ function EmployeeDepartmentSelect ({ currIdEmployee, currIdDepartment }: Props) 
   }
 
   return (
-    <Stack columnGap={1} sx={{
-      marginTop: '1vh',
-      flexDirection: 'row',
-      alignItems: 'start'
-    }}>
+    <Stack columnGap={1} sx={{ marginTop: '1vh', flexDirection: 'row', alignItems: 'start' }}>
       {
         departmentList.length > 0 &&
         <FormControl>
           <Select
             value={newIdDepartment.toString()}
             onChange={handleChange}
-            sx={{
-              height: '4vh',
-              width: {
-                sm: '20vw',
-                md: '15vw'
-              }
-            }}
+            sx={{ height: '4vh', width: { sm: '20vw', md: '15vw' } }}
           >
             {
               departmentList.map((department: Department) => (
@@ -78,4 +68,4 @@ function EmployeeDepartmentSelect ({ currIdEmployee, currIdDepartment }: Props) 
   )
 }
 
-export default EmployeeDepartmentSelect
+export default EmployeeDepartmentUpdateSection

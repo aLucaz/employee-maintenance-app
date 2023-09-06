@@ -1,6 +1,6 @@
 import { type Employee } from '../../../types/Employee'
 import { Paper, Typography } from '@mui/material'
-import EmployeeDepartmentSelect from './EmployeeDepartmentSelect'
+import EmployeeDepartmentUpdateSection from './EmployeeDepartmentUpdateSection'
 
 type EmployeeProps = Pick<Employee, 'firstName' | 'lastName' | 'id' | 'department' | 'idDepartment' | 'phone' | 'address'>
 
@@ -26,7 +26,7 @@ function EmployeePersonalInfoBox (employee: EmployeeProps) {
       <Typography sx={{ textDecoration: 'underline', marginTop: '2vh' }}>
         Update Department
       </Typography>
-      <EmployeeDepartmentSelect
+      <EmployeeDepartmentUpdateSection
         currIdEmployee={employee.id}
         currIdDepartment={employee.idDepartment}
       />

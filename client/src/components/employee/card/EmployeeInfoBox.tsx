@@ -1,4 +1,4 @@
-import { type Employee } from '../../types/Employee'
+import { type Employee } from '../../../types/Employee'
 import { Grid, Typography } from '@mui/material'
 
 function EmployeeInfoBox (employee: Employee) {
