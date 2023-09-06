@@ -15,7 +15,7 @@ function EmployeeDepartmentHistory ({ employeeId, departmentId }: { employeeId: 
   return (
     <Box sx={{ marginTop: '2vh' }}>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="employee history table">
+        <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
               <TableCell>Start Date</TableCell>
@@ -27,7 +27,6 @@ function EmployeeDepartmentHistory ({ employeeId, departmentId }: { employeeId: 
             {history.map((row) => (
               <TableRow
                 key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell>{row.startDate}</TableCell>
                 <TableCell>{row.endDate}</TableCell>
