@@ -35,14 +35,24 @@ function EmployeeDepartmentSelect ({ currIdEmployee, currIdDepartment }: Props) 
   }
 
   return (
-    <Stack sx={{ marginTop: '1vh' }} direction={'row'} columnGap={1} alignItems={'start'}>
+    <Stack columnGap={1} sx={{
+      marginTop: '1vh',
+      flexDirection: 'row',
+      alignItems: 'start'
+    }}>
       {
         departmentList.length > 0 &&
         <FormControl>
           <Select
             value={newIdDepartment.toString()}
             onChange={handleChange}
-            sx={{ height: '4vh', width: '15vw' }}
+            sx={{
+              height: '4vh',
+              width: {
+                sm: '20vw',
+                md: '15vw'
+              }
+            }}
           >
             {
               departmentList.map((department: Department) => (

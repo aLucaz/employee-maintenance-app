@@ -1,16 +1,16 @@
-import { CardMedia } from '@mui/material'
+import { CardMedia, styled } from '@mui/material'
+
+const EmployeeCardMedia = styled(CardMedia)(() => ({
+  height: '15vh',
+  width: '15vh',
+  padding: '1vh'
+}))
 
 function EmployeeCardPhoto ({ photo }: { photo: string }) {
   return (
     <>
-      <CardMedia
-        component={'img'}
+      <EmployeeCardMedia
         image={photo}
-        sx={{
-          height: '15vh',
-          width: '15vw',
-          margin: '5px'
-        }}
       />
     </>
   )

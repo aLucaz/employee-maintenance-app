@@ -6,19 +6,22 @@ import { type Employee } from '../../types/Employee'
 
 function EmployeeCard (employee: Employee) {
   return (
-    <>
-      <Card sx={{
-        height: '20vh',
-        display: 'flex',
-        alignItems: 'center'
+    <Card sx={{
+      height: {
+        xs: '25vh',
+        md: '20vh'
+      },
+      display: 'flex',
+      alignItems: 'center'
+    }}>
+      <EmployeeCardPhoto photo={employee.photo}/>
+      <Grid container sx={{
+        justifyContent: 'start'
       }}>
-        <EmployeeCardPhoto photo={employee.photo}/>
-        <Grid container>
-          <EmployeeInfoBox {...employee}/>
-          <EmployeeDialogBox {...employee}/>
-        </Grid>
-      </Card>
-    </>
+        <EmployeeInfoBox {...employee}/>
+        <EmployeeDialogBox {...employee}/>
+      </Grid>
+    </Card>
   )
 }
 

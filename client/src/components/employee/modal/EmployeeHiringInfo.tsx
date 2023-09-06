@@ -9,7 +9,10 @@ const buttonStyles = {
     backgroundColor: 'red',
     color: 'white',
     padding: 0.5,
-    width: '10vw',
+    width: {
+      sm: '15vw',
+      md: '10vw'
+    },
     marginTop: '1vh',
     '&:hover': {
       backgroundColor: 'red',
@@ -20,7 +23,10 @@ const buttonStyles = {
     backgroundColor: 'green',
     color: 'white',
     padding: 0.5,
-    width: '10vw',
+    width: {
+      sm: '15vw',
+      md: '10vw'
+    },
     marginTop: '1vh',
     '&:hover': {
       backgroundColor: 'green',

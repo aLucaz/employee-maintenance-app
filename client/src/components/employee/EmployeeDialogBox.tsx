@@ -15,18 +15,20 @@ function EmployeeDialogBox (employee: Employee) {
   }
 
   return (
-    <>
-      <Grid item md={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button variant="contained" color="info" onClick={handleOpen}>
-          View Details
-        </Button>
-        <EmployeeDetailsModal
-          employee={employee}
-          handleClose={handleClose}
-          openDetails={openDetails}
-        />
-      </Grid>
-    </>
+    <Grid item md={3} sm={12} sx={{
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: '2vh'
+    }}>
+      <Button variant="contained" onClick={handleOpen}>
+        View Details
+      </Button>
+      <EmployeeDetailsModal
+        openDetails={openDetails}
+        handleClose={handleClose}
+        employee={employee}
+      />
+    </Grid>
   )
 }
 

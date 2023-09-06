@@ -5,7 +5,7 @@ interface Props {
   isActive: boolean
 }
 
-const EmployeeAvatar = styled(Avatar)(() => ({
+const EmployeeAvatar = styled(Avatar)(({ theme }) => ({
   width: '11vw',
   height: '11vw',
   border: '2px solid gray',
@@ -17,10 +17,14 @@ const EmployeeAvatar = styled(Avatar)(() => ({
     width: '100%',
     height: '100%',
     objectFit: 'cover'
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '25vw',
+    height: '25vw'
   }
 }))
 
-const MessageBox = styled(Box)({
+const MessageBox = styled(Box)(({ theme }) => ({
   backgroundColor: '#DC143C',
   color: '#ffffff',
   padding: '0.5vh',
@@ -31,21 +35,23 @@ const MessageBox = styled(Box)({
   height: '1.5vh',
   width: '10vw',
   border: '1px solid gray',
-  borderRadius: '15vh'
-})
+  borderRadius: '15vh',
+  [theme.breakpoints.down('sm')]: {
+    width: '25vw',
+    height: '4vw'
+  }
+}))
 
 function EmployeeModalAvatar ({ photo, isActive }: Props) {
   return (
-    <Box>
-      <Stack direction="column" rowGap={1} sx={{ alignItems: 'center', padding: '1vh' }} >
-        <EmployeeAvatar src={photo} />
-        {
-          isActive
-            ? ''
-            : <MessageBox> Inactive </MessageBox>
-        }
-      </Stack>
-    </Box>
+    <Stack sx={{ alignItems: 'center', padding: '1vh' }} rowGap={1} >
+      <EmployeeAvatar src={photo} />
+      {
+        isActive
+          ? ''
+          : <MessageBox> Inactive </MessageBox>
+      }
+    </Stack>
   )
 }
 

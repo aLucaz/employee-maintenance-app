@@ -14,43 +14,47 @@ interface Props {
 
 function EmployeeDetailsModal ({ employee, openDetails, handleClose }: Props) {
   return (
-    <>
-      <Dialog
-        onClose={handleClose}
-        open={openDetails}
-        fullWidth
-        maxWidth={'md'}
+    <Dialog
+      onClose={handleClose}
+      open={openDetails}
+      fullWidth
+      maxWidth={'md'}
+    >
+      <DialogTitle>
+        Employee Details
+      </DialogTitle>
+      <IconButton
+        onClick={handleClose}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8
+        }}
       >
-        <DialogTitle>
-          Employee Details
-        </DialogTitle>
-        <IconButton
-          onClick={handleClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-        <DialogContent dividers>
-          <Stack direction={'row'} columnGap={5} justifyContent={'center'}>
-            <EmployeeModalAvatar
-              photo={employee.photo}
-              isActive={employee.isActive}
-            />
-            <EmployeePersonalInfoBox {...employee}/>
-            <EmployeeHiringInfo {...employee}/>
-          </Stack>
-          <Divider/>
-          <EmployeeDepartmentHistory
-            employeeId={employee.id}
-            departmentId={employee.idDepartment}
+        <CloseIcon />
+      </IconButton>
+      <DialogContent dividers>
+        <Stack columnGap={5} sx={{
+          justifyContent: 'center',
+          flexDirection: {
+            xs: 'column',
+            md: 'row'
+          }
+        }}>
+          <EmployeeModalAvatar
+            photo={employee.photo}
+            isActive={employee.isActive}
           />
-        </DialogContent>
-      </Dialog>
-    </>
+          <EmployeePersonalInfoBox {...employee}/>
+          <EmployeeHiringInfo {...employee}/>
+        </Stack>
+        <Divider/>
+        <EmployeeDepartmentHistory
+          employeeId={employee.id}
+          departmentId={employee.idDepartment}
+        />
+      </DialogContent>
+    </Dialog>
   )
 }
 
