@@ -2,9 +2,15 @@ import { NextFunction, Request, Response } from "express";
 import createHttpError from "http-errors";
 import { ObjectSchema } from "joi";
 
+export const enum RequestKeys {
+  PARAMS = "params",
+  BODY = "body",
+  QUERY = "query",
+}
+
 export default function validator(
   schema: ObjectSchema,
-  attribute: keyof Request,
+  attribute: RequestKeys,
 ) {
   return (req: Request, _res: Response, next: NextFunction) => {
     const result = schema.validate(req[attribute]);

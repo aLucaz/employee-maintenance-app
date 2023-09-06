@@ -3,7 +3,7 @@ import { Router as router } from "express";
 import { DepartmentController } from "@/department/infrastructure/department-controller";
 import container from "@/department/infrastructure/injection/container";
 import { Types } from "@/department/infrastructure/injection/types";
-import validator from "@/resources/validator";
+import validator, { RequestKeys } from "@/resources/validator";
 
 import addEmployeeInDepartmentSchema from "./middlewares/validation/schemas/add-employee-in-department-schema";
 import idSchema from "./middlewares/validation/schemas/id-schema";
@@ -18,13 +18,13 @@ departmentRouter.get("/", departmentController.listDepartments);
 
 departmentRouter.put(
   "/",
-  validator(addEmployeeInDepartmentSchema, "body"),
+  validator(addEmployeeInDepartmentSchema, RequestKeys.BODY),
   departmentController.addEmployeeInDepartment,
 );
 
 departmentRouter.get(
   "/history/:id",
-  validator(idSchema, "params"),
+  validator(idSchema, RequestKeys.PARAMS),
   departmentController.departmentHistory,
 );
 
