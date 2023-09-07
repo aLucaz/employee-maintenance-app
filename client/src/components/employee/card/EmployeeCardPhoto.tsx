@@ -6,14 +6,12 @@ const EmployeeCardMedia = styled(CardMedia)(() => ({
   padding: '1vh'
 }))
 
-function EmployeeCardPhoto ({ photo }: { photo: string }) {
-  return (
-    <>
-      <EmployeeCardMedia
-        image={photo}
-      />
-    </>
-  )
+interface EmployeeCardPhotoProps {
+  photo: string
 }
+
+const EmployeeCardPhoto: React.FC<EmployeeCardPhotoProps> = (
+  { photo }: EmployeeCardPhotoProps
+) => <EmployeeCardMedia image={photo}/>
 
 export default EmployeeCardPhoto

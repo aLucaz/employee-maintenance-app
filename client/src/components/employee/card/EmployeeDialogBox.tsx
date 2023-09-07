@@ -3,7 +3,13 @@ import { useState } from 'react'
 import { type Employee } from '../../../types/Employee'
 import EmployeeDetailsModal from '../modal/EmployeeDetailsModal'
 
-function EmployeeDialogBox (employee: Employee) {
+interface EmployeeDialogBoxProps {
+  employee: Employee
+}
+
+const EmployeeDialogBox: React.FC<EmployeeDialogBoxProps> = (
+  { employee }: EmployeeDialogBoxProps
+) => {
   const [openDetails, setOpenDetails] = useState(false)
 
   const handleOpen = () => {

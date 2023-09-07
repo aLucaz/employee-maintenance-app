@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { useState, useEffect, type Dispatch, type SetStateAction } from 'react'
 
-export default function useDataLoader<T> (url: string, dependencies: unknown[] = []): [T[], Dispatch<SetStateAction<T[]>> ] {
+export const useDataLoader = <T> (
+  url: string,
+  dependencies: unknown[] = []
+): [T[], Dispatch<SetStateAction<T[]>>] => {
   const [data, setData] = useState<T[]>([])
   useEffect(() => {
     const controller = new AbortController()

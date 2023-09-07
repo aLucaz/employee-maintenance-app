@@ -1,8 +1,8 @@
 import { Button, Paper, Typography } from '@mui/material'
 import { type Employee } from '../../../types/Employee'
 import axios from 'axios'
-import { useContext } from 'react'
-import { EmployeeContext } from '../../../context/employee-context'
+import { useUpdateEmployeeById } from '../../../hooks/useUpdateEmployeeById'
+import Routes from '../../../lib/axios/routes'
 
 const buttonStyles = {
   deactivate: {
@@ -35,12 +35,18 @@ const buttonStyles = {
   }
 }
 
-function EmployeeHiringInfo (employee: Employee) {
-  const { updateEmployeeById } = useContext(EmployeeContext)
+interface EmployeeHiringInfoProps {
+  employee: Employee
+}
+
+const EmployeeHiringInfo: React.FC<EmployeeHiringInfoProps> = (
+  { employee }: EmployeeHiringInfoProps
+) => {
+  const updateEmployeeById = useUpdateEmployeeById()
 
   const handleClick = () => {
     const isActive = !employee.isActive
-    axios.put(`/employee/${employee.id}`, {
+    axios.put(`${Routes.UPDATE_EMPLOYEE_BY_ID}/${employee.id}`, {
       isActive
     }).then(() => {
       updateEmployeeById(employee.id, { ...employee, isActive })
@@ -58,7 +64,9 @@ function EmployeeHiringInfo (employee: Employee) {
         {employee.formattedHireDate}
       </Typography>
       <Typography variant="body1" color="text.secondary">
-        {`${employee.hireDuration?.years}y - ${employee.hireDuration?.months}m - ${employee.hireDuration?.days}d`}
+        {employee.hireDuration?.years}y - {' '}
+        {employee.hireDuration?.months}m - {' '}
+        {employee.hireDuration?.days}d
       </Typography>
       <Button
         onClick={handleClick}

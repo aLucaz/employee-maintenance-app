@@ -1,5 +1,6 @@
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import useDataLoader from '../../../hooks/use-data-loader'
+import { useDataLoader } from '../../../hooks/useDataLoader'
+import routes from '../../../lib/axios/routes'
 
 interface History {
   id: number
@@ -9,8 +10,17 @@ interface History {
   departmentName: string
 }
 
-function EmployeeDepartmentHistory ({ employeeId, departmentId }: { employeeId: number, departmentId: number }) {
-  const [history] = useDataLoader<History>(`/department/history/${employeeId}`, [departmentId])
+interface EmployeeDepartmentHistoryProps {
+  employeeId: number
+  departmentId: number
+}
+
+const EmployeeDepartmentHistory: React.FC<EmployeeDepartmentHistoryProps> = (
+  { employeeId, departmentId }: EmployeeDepartmentHistoryProps
+) => {
+  const [history] = useDataLoader<History>(
+    `${routes.GET_EMPLOYEE_DEPARTMENT_HISTORY}/${employeeId}`, [departmentId]
+  )
 
   return (
     <Box sx={{ marginTop: '2vh' }}>
@@ -24,15 +34,17 @@ function EmployeeDepartmentHistory ({ employeeId, departmentId }: { employeeId: 
             </TableRow>
           </TableHead>
           <TableBody>
-            {history.map((row) => (
-              <TableRow
-                key={row.id}
-              >
-                <TableCell>{row.startDate}</TableCell>
-                <TableCell>{row.endDate}</TableCell>
-                <TableCell>{row.departmentName}</TableCell>
-              </TableRow>
-            ))}
+            {
+              history.map((row) => (
+                <TableRow
+                  key={row.id}
+                >
+                  <TableCell>{row.startDate}</TableCell>
+                  <TableCell>{row.endDate}</TableCell>
+                  <TableCell>{row.departmentName}</TableCell>
+                </TableRow>
+              ))
+            }
           </TableBody>
         </Table>
       </TableContainer>

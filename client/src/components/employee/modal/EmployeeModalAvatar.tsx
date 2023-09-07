@@ -1,10 +1,5 @@
 import { Avatar, Box, Stack, styled } from '@mui/material'
 
-interface Props {
-  photo: string
-  isActive: boolean
-}
-
 const EmployeeAvatar = styled(Avatar)(({ theme }) => ({
   width: '11vw',
   height: '11vw',
@@ -42,17 +37,22 @@ const MessageBox = styled(Box)(({ theme }) => ({
   }
 }))
 
-function EmployeeModalAvatar ({ photo, isActive }: Props) {
-  return (
-    <Stack sx={{ alignItems: 'center', padding: '1vh' }} rowGap={1} >
-      <EmployeeAvatar src={photo} />
-      {
-        isActive
-          ? ''
-          : <MessageBox> Inactive </MessageBox>
-      }
-    </Stack>
-  )
+interface EmployeeModalAvatarProps {
+  photo: string
+  isActive: boolean
 }
+
+const EmployeeModalAvatar: React.FC<EmployeeModalAvatarProps> = (
+  { photo, isActive }: EmployeeModalAvatarProps
+) => (
+  <Stack sx={{ alignItems: 'center', padding: '1vh' }} rowGap={1} >
+    <EmployeeAvatar src={photo} />
+    {
+      isActive
+        ? ''
+        : <MessageBox> Inactive </MessageBox>
+    }
+  </Stack>
+)
 
 export default EmployeeModalAvatar

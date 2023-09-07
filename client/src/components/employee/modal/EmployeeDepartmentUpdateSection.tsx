@@ -1,30 +1,33 @@
 import { Button, FormControl, FormHelperText, MenuItem, Select, Stack, type SelectChangeEvent } from '@mui/material'
 import axios from 'axios'
-import { useContext, useState } from 'react'
-import { EmployeeContext } from '../../../context/employee-context'
-import useDataLoader from '../../../hooks/use-data-loader'
+import { useState } from 'react'
+import { useDataLoader } from '../../../hooks/useDataLoader'
+import { useUpdateEmployeeById } from '../../../hooks/useUpdateEmployeeById'
+import Routes from '../../../lib/axios/routes'
 
 interface Department {
   id: number
   name: string
 }
 
-interface Props {
+interface EmployeeDepartmentUpdateSectionProps {
   currIdEmployee: number
   currIdDepartment: number
 }
 
-function EmployeeDepartmentUpdateSection ({ currIdEmployee, currIdDepartment }: Props) {
-  const [departmentList] = useDataLoader<Department>('/department')
+const EmployeeDepartmentUpdateSection: React.FC<EmployeeDepartmentUpdateSectionProps> = (
+  { currIdEmployee, currIdDepartment }: EmployeeDepartmentUpdateSectionProps
+) => {
+  const [departmentList] = useDataLoader<Department>(Routes.GET_DEPARTMENT_LIST_URL)
   const [newIdDepartment, setNewIdDepartment] = useState(currIdDepartment)
-  const { updateEmployeeById } = useContext(EmployeeContext)
+  const updateEmployeeById = useUpdateEmployeeById()
 
   const handleChange = (event: SelectChangeEvent) => {
     setNewIdDepartment(parseInt(event.target.value))
   }
 
   const handleUpdate = () => {
-    axios.put('/department', {
+    axios.put(Routes.UPDATE_EMPLOYEE_DEPARTMENT_URL, {
       idEmployee: currIdEmployee,
       idDepartment: newIdDepartment
     }).then((res) => {

@@ -2,11 +2,10 @@ import { Container, Grid } from '@mui/material'
 import { type Employee } from '../types/Employee'
 import EmployeeCard from '../components/employee/card/EmployeeCard'
 import TitledBox from '../components/shared/TitledBox'
-import { useContext } from 'react'
-import { EmployeeContext } from '../context/employee-context'
+import { useEmployeeList } from '../hooks/useEmployeeList'
 
-function EmployeesPanel () {
-  const { employeeList } = useContext(EmployeeContext)
+const EmployeesPanel = () => {
+  const employeeList = useEmployeeList()
 
   return (
     <Container>
@@ -15,7 +14,7 @@ function EmployeesPanel () {
         {
           employeeList.map((employee: Employee) => (
             <Grid item md={8} key={employee.id}>
-              <EmployeeCard {...employee}/>
+              <EmployeeCard employee={employee}/>
             </Grid>
           ))
         }
