@@ -10,6 +10,8 @@ This is the backend of the employee maintenance app.
 - Express.js
 - Typescript
 - Postgres
+- Joi validations
+- Middlewares
 
 ## Patterns used
 

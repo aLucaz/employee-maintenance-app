@@ -8,6 +8,9 @@ This is the frontend of the employee maintenance app.
 - Make
 - React (v18)
 - Typescript
+- Yarn
+- Vitest
+- Vite
 
 ## Patterns used
 
@@ -15,8 +18,11 @@ This is the frontend of the employee maintenance app.
 - SOLID principles
 - DRY
 - Modularization
+- Custom hooks
+- Global state management
+- Responsiveness
 
-## File structure
+## Project structure
 
 ![structure](./assets/image.png)
 
