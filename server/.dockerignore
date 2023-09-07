@@ -2,3 +2,7 @@ node_modules
 .idea
 .eslintrc.js
 .env
+.git
+coverage
+dist
+test
