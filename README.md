@@ -61,7 +61,10 @@ docker-compose -f docker-compose.yml \
         up --build -d
 ```
 
-test the app using `http://localhost:3000/`
+**Important**
+
+- test the app using `http://localhost:3000/`
+- test the apis using the [postman file](./resources/postman/collection.json).
 
 ## How to remove the app?
 
