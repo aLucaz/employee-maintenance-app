@@ -29,6 +29,7 @@ This repository contains two projects:
 - Node.js (v18)
 - Express.js
 - Postgres
+- Yarn (v1.22.19)
 
 ## Patterns used
 
